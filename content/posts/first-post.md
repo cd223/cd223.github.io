@@ -1,4 +1,4 @@
----
+<!-- ---
 title: "My first post"
 date: 2025-06-14
 tags: ["first"]
@@ -19,4 +19,4 @@ ShowRssButtonInSectionTermList: true
 UseHugoToc: true
 ---
 
-This is my first post.
+This is my first post. -->
