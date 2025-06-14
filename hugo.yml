@@ -1,0 +1,126 @@
+baseURL: "https://chrisdavies.dev"
+title: Chris Davies
+theme: PaperMod
+
+enableRobotsTXT: true
+buildDrafts: false
+buildFuture: false
+buildExpired: false
+
+minify:
+  disableXML: true
+  minifyOutput: true
+
+params:
+  profileMode:
+    enabled: true
+    title: "Hi, I'm Chris 👋"
+    subtitle: "Senior Software Engineer · London, UK 🇬🇧"
+    imageUrl: "images/profile.jpg"
+    imageWidth: 300
+    imageHeight: 300
+    buttons:
+      - name: About
+        url: "/about"
+      - name: Blog
+        url: "/posts"
+
+  env: production
+  title: Chris Davies
+  description: "Chris Davies"
+  keywords: [Blog, About]
+  author: Chris Davies
+  DateFormat: "January 2, 2006"
+  defaultTheme: auto
+  disableThemeToggle: false
+  ShowReadingTime: true
+  ShowShareButtons: true
+  ShowPostNavLinks: true
+  ShowBreadCrumbs: true
+  ShowCodeCopyButtons: false
+  ShowWordCount: true
+  ShowRssButtonInSectionTermList: true
+  UseHugoToc: true
+  disableSpecial1stPost: false
+  disableScrollToTop: false
+  comments: false
+  hidemeta: false
+  hideSummary: false
+  showtoc: false
+  tocopen: false
+
+  assets:
+    favicon: "favicon.ico"
+    favicon16x16: "favicon.ico"
+    favicon32x32: "favicon.ico"
+
+  label:
+    text: "> chrisdavies.dev"
+    icon: "favicon.ico"
+    iconHeight: 35
+  
+  socialIcons:
+    - name: linkedin
+      url: "https://www.linkedin.com/in/c-j-davies/"
+    - name: github
+      url: "https://github.com/cd223"
+    - name: x
+      url: "https://x.com/c_davies21"
+
+  cover:
+    hidden: true # hide everywhere but not in structured data
+    hiddenInList: true # hide on list pages and home
+    hiddenInSingle: true # hide on single page
+
+  # for search
+  # https://fusejs.io/api/options.html
+  fuseOpts:
+    isCaseSensitive: false
+    shouldSort: true
+    location: 0
+    distance: 1000
+    threshold: 0.3
+    limit: 5
+    minMatchCharLength: 0
+    # limit: 10 # refer: https://www.fusejs.io/api/methods.html#search
+    keys:
+      - title
+      - content
+      - tags
+
+menu:
+  main:
+    - identifier: blog
+      name: Blog ✍️
+      url: /posts/
+      weight: 10
+
+    - identifier: about
+      name: About 💻
+      url: /about/
+      weight: 20
+
+    - identifier: search
+      name: Search 🔎 
+      url: /search/
+      weight: 30
+
+    - identifier: tags
+      name: Tags 🏷️
+      url: /tags/
+      weight: 40
+
+pygmentsUseClasses: true
+markup:
+  highlight:
+    noClasses: false
+
+outputs:
+  home:
+    - HTML
+    - RSS
+    - JSON # necessary for search
+
+caches:
+  images:
+    dir: :cacheDir/images
