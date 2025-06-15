@@ -20,8 +20,18 @@ On my [Blog](../posts/), I share:
 - Shout-outs to content I’m enjoying (reading, watching, listening)  
 - War stories and incidents — from projects I’ve worked on or public ones  
 
-I try to keep things short and engaging. If something resonates, I’d love to start a conversation!
+I try to keep things short and engaging. If something resonates or you have a different take you think I should consider, I’d love to start a conversation! I don't proclaim to be an expert in what I write about, so I'd love to hear different viewpoints.
+
+## My background 🧑‍💻
+- **Languages**: Java, Kotlin, Python, TypeScript, SQL.
+- **Infrastructure**: AWS (Lambda, ECS, S3, DynamoDB, RDS, Redshift, SQS/SNS), Terraform, Docker. 
+
+In my career I have worked on pricing and order management sytems at [Morgan Stanley](https://www.morganstanley.com/). I have also launched and supported new SaaS products for Hedge Funds and Banks at [OpenGamma](https://opengamma.com/). In that time, I have been an Engineering Manager and an Individual Contributor. 
+
+This experience means I do have opinions, but they are loosely held. The two words I use most are "it depends".
+
+![Experience](/images/languages-tools.png)
 
 ## Note to recruiters / agencies 🤝
 
-I’m happy where I am right now and not actively looking. But if you have something interesting, feel free to reach out on [LinkedIn](https://www.linkedin.com/in/c-j-davies/). I don’t make my CV public, but happy to share it privately if needed.
+I’m happy where I am right now and not actively looking. However, if you have read my blogs and  have something interesting you think is a good fit, feel free to reach out on [LinkedIn](https://www.linkedin.com/in/c-j-davies/).

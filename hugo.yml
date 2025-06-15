@@ -105,8 +105,8 @@ menu:
       url: /search/
       weight: 30
 
-    - identifier: tags
-      name: Tags 🏷️
+    - identifier: topics
+      name: Topics 🏷️
       url: /tags/
       weight: 40
 
