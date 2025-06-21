@@ -1,20 +1,19 @@
 ---
-title: "Writing in Public"
+title: "Writing in Public 📝"
 date: 2025-06-15
 tags: ["career"]
-showToc: false
+showToc: true
 draft: false
 TocOpen: false
 hidemeta: false
 comments: false
 disableHLJS: true
 disableShare: false
-disableHLJS: false
 hideSummary: false
 ShowReadingTime: true
 ShowBreadCrumbs: true
 ShowPostNavLinks: true
-ShowWordCount: true
+ShowWordCount: false
 ShowRssButtonInSectionTermList: true
 UseHugoToc: true
 ---
@@ -44,5 +43,5 @@ Ramblings on various tech industry and career topics, such as:
 
 I will aim to hold myself accountable to post every ~2 weeks each year. 
 
-### Get in touch 
+### Get in touch 📧
 As I say in my [About](../../about/) page, I would love to hear from you. If you got to the end of this post and have anything to share, please get in touch on [LinkedIn](https://www.linkedin.com/in/c-j-davies/) or [Twitter](https://x.com/c_davies21).
