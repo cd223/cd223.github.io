@@ -66,6 +66,8 @@ params:
       url: "https://github.com/cd223"
     - name: x
       url: "https://x.com/c_davies21"
+    - name: devto
+      url: "https://dev.to/chris_davies"
 
   cover:
     hidden: true # hide everywhere but not in structured data
