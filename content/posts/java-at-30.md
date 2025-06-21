@@ -1,6 +1,6 @@
 ---
 title: "Java at 30 🎂"
-date: 2025-06-20
+date: 2025-06-21
 tags: ["java", "programming"]
 showToc: true
 draft: false
