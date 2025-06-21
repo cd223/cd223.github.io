@@ -302,7 +302,7 @@ def waste_some_time(num_times):
 A natural question might be: _"If Java has largely copied its recent good features from other JVM languages, why did it not get replaced by them?"_. 
 
 Indeed, [recent polling](https://www.index.dev/blog/most-popular-programming-languages-) shows that it is standing strong compared to Kotlin, Scala, Groovy etc.
-A former colleague of mine -- [Stephen Colebourne](https://github.com/jodastephen) -- summarizes this far better than I ever could wish to in his 2024 [Devoxx](https://www.devoxx.co.uk/) talk.
+An esteemed colleague of mine -- [Stephen Colebourne](https://github.com/jodastephen) -- summarizes this far better than I ever could wish to in his 2024 [Devoxx](https://www.devoxx.co.uk/) talk.
 
 > _**TL;DW (Too Long; Didn't Watch)**_  
 > _Had Kotlin been quicker to adopt a v1.0, we might all be writing Kotlin code today instead of Java._
