@@ -1,0 +1,15 @@
+{{ $src := .Get "src" }}
+{{ $width := .Get "width" | default "800" }}
+{{ $height := .Get "height" | default "" }}
+{{ $alt := .Get "alt" | default "" }}
+
+{{ $img := .Page.Resources.GetMatch $src }}
+
+{{ if $img }}
+    {{ $sizeStr := printf "%sx%s q100" $width $height }}
+    {{ $resized := cond (eq $height "") ($img.Resize (printf "%sx q100" $width)) ($img.Resize $sizeStr) }}
+
+    <img src="{{ $resized.RelPermalink }}" alt="{{ $alt }}" width="{{ $resized.Width }}" height="{{ $resized.Height }}" loading="lazy">
+{{ else }}
+    <img src="{{ $src | safeURL }}" alt="{{ $alt }}" loading="lazy">
+{{ end }}

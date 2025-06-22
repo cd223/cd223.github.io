@@ -30,7 +30,7 @@ As with everything in technology, you need to use the right tool for the job, an
 
 As we celebrate 30 years of the language, this blog post will explore some [features](#powerful-features-) I particularly admire, as well as a ["wishlist"](#feature-wishlist-) of features I have come across in other languages that would prove a very neat JEP in a future release.
 
-![Java at 30](/images/java-at-30.png)
+{{< imgresize src="java-at-30.png" width="650" height="400" alt="JetBrains' IDE splash screen celebrating Java at 30" >}}
 _*Image credit: [JetBrains](https://www.jetbrains.com/lp/java-30/)*_
 
 ### Java in a Nutshell 🌰
@@ -76,7 +76,7 @@ I am yet to be fully convinced on unnamed variables (`_`) as I worry they will i
 | **21**      | Virtual threads, Pattern matching with `switch`                       |
 | **22+**     | Stream Gatherers, Unnamed variables (`_`), Statements before `super`  |
 
-![JEPs over time](/images/jeps.png)
+{{< imgresize src="jeps.png" width="700" height="375" alt="Number of JEPs over time" >}}
 _*Image credit: [InfoQ](https://www.infoq.com/news/2025/03/java24-released/)*_
 
 ### Feature wishlist 💡

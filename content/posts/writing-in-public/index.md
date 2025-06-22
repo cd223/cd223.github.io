@@ -24,7 +24,7 @@ UseHugoToc: true
 
 It might sound like a rogue place to start, but there are lots of parallels with blogging. I have always admired creators in the Tech space who manage to hold down full-time jobs whilst also putting their experience out there for others to learn from - all for free. 
 
-![Running](/images/man-running.jpg)
+{{< imgresize src="man-running.jpg" width="700" height="425" alt="Man running in the sun" >}}
 
 ### Motivations
 
