@@ -9,7 +9,7 @@
     {{ $sizeStr := printf "%sx%s q100" $width $height }}
     {{ $resized := cond (eq $height "") ($img.Resize (printf "%sx q100" $width)) ($img.Resize $sizeStr) }}
 
-    <img src="{{ $resized.RelPermalink }}" alt="{{ $alt }}" width="{{ $resized.Width }}" height="{{ $resized.Height }}" loading="lazy">
+    <img src="{{ $resized.RelPermalink }}" class="img-resized" alt="{{ $alt }}" width="{{ $resized.Width }}" height="{{ $resized.Height }}" loading="lazy">
 {{ else }}
-    <img src="{{ $src | safeURL }}" alt="{{ $alt }}" loading="lazy">
+    <img src="{{ $src | safeURL }}" class="img-resized" alt="{{ $alt }}" loading="lazy">
 {{ end }}
