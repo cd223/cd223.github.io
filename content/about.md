@@ -31,7 +31,3 @@ In my career I have worked on pricing and order management sytems at [Morgan Sta
 This experience means I do have opinions, but they are loosely held. The two words I use most are "it depends".
 
 ![Experience](/images/languages-tools.png)
-
-## Note to recruiters / agencies 🤝
-
-I’m happy where I am right now and not actively looking. However, if you have read my blogs and  have something interesting you think is a good fit, feel free to reach out on [LinkedIn](https://www.linkedin.com/in/c-j-davies/).
