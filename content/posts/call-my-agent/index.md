@@ -1,6 +1,6 @@
 ---
 title: "Call My Agent 🤖"
-date: 2025-06-24
+date: 2025-06-27
 tags: ["artificial intelligence", "book"]
 showToc: true
 draft: true
@@ -52,51 +52,80 @@ In the next few sections, I'll go over some takeaways and my open questions.
 _*With thanks to [Sam Bhagwat](https://www.linkedin.com/in/sambhagwat/)*_
 
 ### Jargon Busting 🧑‍🏫
-The book introduces a lot of terminology. A true test of my understanding is whether I can now explain these concepts having read the book, which is what this section tries to achieve. 
+The book introduces a lot of terminology. A true test of my understanding is whether I can now explain these concepts, which is what this section tries to achieve. Feel free to skip this section if you have a good understanding.
 
 > _**Disclaimer ⚠️**: I did have some background knowledge before reading this book, but not much. Academic readers might cringe at my attempt._
 
-| Term                | Definition                                                                                                                                                                                                                                                                                             | Example               |
-|---------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------|
-| **LLM**             | A probabilistic model trained on natural language which given a training corpus and some input, will predict the most likely output using matrix multiplication.                                                                                                                                       | GPT-o1, Gemini, Llama |
-| **Prompt**          | Input to an LLM (commonly textual). These can be _system_ or _user_ level, which alters the scope (e.g. chat-level or individual query respectively).                                                                                                                                                  | ...                   |
-| **Token**           | A raw chunk of text, taken from a larger document or textual input.                                                                                                                                                                                                                                    | ...                   |
-| **Vector**          | A transformed `N`-dimensional data structure representing a token. `N` is typically ~1536.                                                                                                                                                                                                             | ...                   |
-| **Context Window**  | The number of text chunks (tokens in the input and output) which the LLM can handle at any one time when processing a query.                                                                                                                                                                           | ...                   |
-| **Agent**           | A                                                                                                                                                                                                                                                                                                      | ...                   |
-| **Memory**          | ...                                                                                                                                                                                                                                                                                                    | ...                   |
-| **Tool**            | A method for the agent to access data e.g. a database, web resource or even another Agent.                                                                                                                                                                                                             | ...                   |
-| **MCP**             | A protocol (like HTTP) defined by [Anthropic](https://www.anthropic.com/news/model-context-protocol) which stipulates how an agent should retrieve information from a third-party source. An MCP Server (hosted locally or remotely) declares its prompts, tools and resources for MCP clients to use. | ...                   |
-| **A2A**             | A protocol defined by [Google](https://developers.googleblog.com/en/a2a-a-new-era-of-agent-interoperability/) which stipulates how an Agent should communicate with another Agent.                                                                                                                     | ...                   |
-| **RAG**             | A method for enhancing the information available to an LLM.                                                                                                                                                                                                                                            | ...                   |
-| **Vector Database** | A data store specialised in storage and retrieval of `N`-dimensional vectors.                                                                                                                                                                                                                          | pg_vector, Pinecone   |
-| **Guardrail**       | ...                                                                                                                                                                                                                                                                                                    | ...                   |
-| **Eval**            | Methods for evaluating the effectiveness and accuracy of an Agent.                                                                                                                                                                                                                                     | ...                   |
+| Term                   | Definition                                                                                                                                                                                                                                                                                                    | Example                                                                                           |
+|------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------|
+| **LLM**                | Probabilistic model trained on natural language which given a training corpus and input, will predict the most likely output using mathematical operations (e.g., matrix multiplication). These can be _hosted_ or _open source_.                                                                             | GPT-o1, Gemini, Llama                                                                             |
+| **Prompt**             | Input to an LLM (commonly textual). These can be _system_ or _user_ level, which alters the scope (e.g. chat-level or individual query respectively). Prompt engineering is the practice of tailoring prompts to improve outputs.                                                                             | `"ChatGPT is cool!"`                                                                              |
+| **Token**              | Single raw chunk of text, taken from a larger document or textual input.                                                                                                                                                                                                                                      | `["Chat", "G", "PT", " is", " cool", "!"]`                                                        |
+| **Embedding / Vector** | Transformed `N`-dimensional data structure representing the _semantic meaning_ of a token or document. `N` is typically ~1536. This structure is used for _similarity searches_ in `N`-dimensional space.                                                                                                     | `[0.12, ..., 0.95]`                                                                               |
+| **Context Window**     | The number of text chunks (tokens in the input and output) which the LLM can handle at any one time when processing a query.                                                                                                                                                                                  | GPT-4 = ~128k tokens.                                                                             |
+| **Agent**              | A long-lived process that uses LLMs to perform tasks. They may be allocated memory, invoke tools, access resources, and maintain context over time.                                                                                                                                                           | Assistant that books meetings.                                                                    |
+| **MCP**                | Model Context Protocol. Defined by [Anthropic](https://www.anthropic.com/news/model-context-protocol) which stipulates how an agent should retrieve information from a third-party source. An MCP Server (hosted locally or remotely) declares its _prompts_, _tools_ and _resources_ for MCP clients to use. | Agent is given instructions for connecting to a database to find weather information.             |
+| **Tool (MCP)**         | Method for the agent to perform a task e.g. a web resource lookup, or calling another Agent.                                                                                                                                                                                                                  | `fetch_weather(city)`                                                                             |
+| **Resource (MCP)**     | Data source used by the agent when performing tasks e.g. a database.                                                                                                                                                                                                                                          | `city_db`                                                                                         |
+| **Prompt (MCP)**       | Templated instructions for the agent to perform a task e.g. details needed to call a tool or read from a resource.                                                                                                                                                                                            | `"Search {query} in {resource}"`                                                                  |
+| **A2A**                | Agent To Agent Protocol. Defined by [Google](https://developers.googleblog.com/en/a2a-a-new-era-of-agent-interoperability/) which stipulates how an Agent should communicate with another Agent, given they are likely built independently.                                                                   | `Agent1` asking `Agent2` to extract data.                                                         |
+| **RAG**                | Retrieval Augmented Generation. A method for enhancing the information available to an LLM by performing on-demand searches against a vector database to enrich a prompt.                                                                                                                                     | Retrieval of FAQs before answering queries.                                                       |
+| **Vector Database**    | A data store specialised in storage and retrieval of `N`-dimensional vectors.                                                                                                                                                                                                                                 | [pgvector](https://github.com/pgvector/pgvector/), [Pinecone](https://www.pinecone.io/)           |
+| **Agentic Workflow**   | An emerging practice which defines the tasks agents perform as steps in a deterministic workflow - as a set of steps or graph.                                                                                                                                                                                | `Fetch doc → summarise → email`                                                                   |
+| **Guardrail**          | Enhancements to the prompts given to LLMs to minimise the risk of them producing insecure or malicious content. More of a _guidance_ mechanism than a watertight measure.                                                                                                                                     | Requesting that PII is not returned.                                                              |
+| **Eval**               | Methods for evaluating the effectiveness and accuracy of an Agent.                                                                                                                                                                                                                                            | [OpenAI Evals](https://cookbook.openai.com/examples/evaluation/getting_started_with_openai_evals) |
 
-If you are a visual learner, then I am a big fan of the [ByteByteGo](https://www.youtube.com/@ByteByteGo) YouTube channel, which has a short video summarizing the concept of an agent.
+If you are a visual learner, then I am a fan of the [ByteByteGo](https://www.youtube.com/@ByteByteGo) YouTube channel, which has a short video explaining some of these concepts.
 {{< youtube id="eHEHE2fpnWQ" start=0 loading="lazy" autoplay=false >}}
 
 ### Takeaways 📝
-- Non-determinism
 
-### Open Questions ❓
-- Measuring what matters (https://techinformed.com/is-klarnas-scale-back-on-ai-a-turning-point-for-cx/)
-- https://www.infoq.com/news/2025/06/openai-o3-pro/
-- Abstraction comes at a cost
-- Assistance, not autonomy
-- Consensus on protocols, registries (not like CVEs / IANA / IETF)
-- Transparency: Confidence scores
-- Selection of tools
-- o11y
-- Language / regional differences
-- Security (Legal trifecta) https://simonwillison.net/2025/Jun/16/the-lethal-trifecta/
-- Do you need an LLM (https://arxiv.org/pdf/2506.02153)
-- https://stratechery.com/2025/checking-in-on-ai-and-the-big-five
+#### Non-determinism
+...
+
+#### Model Size vs Cost
+...
+
+#### Prompt techniques
+https://www.promptingguide.ai/techniques/cot
+
+#### Serverless 
+
+
+### Hot Takes 👀
+
+#### Lean towards determinism
 - https://surma.dev/things/langgraph
 
+#### Measure what matters
+- Measuring what matters (https://techinformed.com/is-klarnas-scale-back-on-ai-a-turning-point-for-cx/)
+- https://www.infoq.com/news/2025/06/openai-o3-pro/
+
+#### Keep a human in the loop
+- Abstraction comes at a cost
+- Assistance, not autonomy - https://incident.io/building-with-ai
+
+#### Know when not to expose your data
+- Security (Legal trifecta) https://simonwillison.net/2025/Jun/16/the-lethal-trifecta/
+
+#### Aim for consensus
+- Consensus on protocols, registries (not like CVEs / IANA / IETF)
+- https://www-finos-org.cdn.ampproject.org/c/s/www.finos.org/blog/finos-ai-governance-framework-v1.0-turning-drafts-into-deployable-guardrails
+
+#### Aim for transparency
+- Confidence scores
+- Selection of tools
+
+- o11y
+- Language / regional differences
+- https://stratechery.com/2025/checking-in-on-ai-and-the-big-five
+
 ### Summary 🧵
-As you might expect, free courses are available on the topic by the likes of [Mastra](https://mastra.ai/course) and [Hugging Face](https://huggingface.co/learn/agents-course/unit0/introduction).
-- Future posts may dive into the topics mentioned in the intro, or practical examples of hosted systems.
+In this post we reviewed the
+
+This space is changing. If we look back on this post in 1-2 years, I would be interested to see what changes. Perhaps the majority of use cases [won't even be needing an LLM](https://arxiv.org/pdf/2506.02153).
+
+Free courses are available on the topic by the likes of [Mastra](https://mastra.ai/course) and [Hugging Face](https://huggingface.co/learn/agents-course/unit0/introduction), which I will be looking into next.
 
 ### Get in touch 📧
 As I say in my [About](../../about/) page, I would love to hear from you. If you got to the end of this post and have anything to share, please get in touch on [LinkedIn](https://www.linkedin.com/in/c-j-davies/) or [Twitter](https://x.com/c_davies21).
