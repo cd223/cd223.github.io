@@ -1,0 +1,12 @@
+{{ $collapsible := .Get "collapse" }}
+{{ if eq $collapsible "true" }}
+    <details class="callout callout-{{ .Get "type" | default "note" }}">
+        <summary><strong>{{ .Get "title" }}</strong></summary>
+        <div>{{ .Inner | markdownify }}</div>
+    </details>
+{{ else }}
+    <div class="callout callout-{{ .Get "type" | default "note" }}">
+        {{ if .Get "title" }}<strong>{{ .Get "title" }}</strong><br/>{{ end }}
+        {{ .Inner | markdownify }}
+    </div>
+{{ end }}

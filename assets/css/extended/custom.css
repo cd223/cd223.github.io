@@ -4,3 +4,46 @@ img.img-resized {
   display: block;
   margin: 1rem auto;
 }
+
+.callout {
+  padding: 1rem;
+  margin: 1.5rem 0;
+  border-left: 4px solid var(--callout-border);
+  border-radius: 0.5rem;
+  background-color: var(--callout-bg);
+  color: var(--callout-fg);
+}
+
+.callout-note    { --callout-border: #1e90ff; --callout-bg: #c5def6 }
+.callout-warning { --callout-border: #ffcc00; --callout-bg: #f7eab5 }
+.callout-danger  { --callout-border: #ff5555; --callout-bg: #fab1b1 }
+.callout-success { --callout-border: #28a745; --callout-bg: #b8f5c6 }
+
+:root {
+  --callout-bg: #f4f7ff;
+  --callout-fg: #1a1a1a;
+}
+
+[data-theme='dark'] {
+  --callout-bg: #1f2937;  /* Dark slate */
+  --callout-fg: #f1f5f9;  /* Light grey */
+}
+
+.callout code {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: inherit;
+  padding: 0.2em 0.4em;
+  border-radius: 4px;
+}
+
+.callout a {
+  color: var(--callout-link-color);
+}
+
+:root {
+  --callout-link-color: #0645ad; /* Medium blue for light mode */
+}
+
+[data-theme='dark'] {
+  --callout-link-color: #66ccff; /* Light blue for dark mode */
+}
