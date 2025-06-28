@@ -3,7 +3,7 @@ title: "Call My Agent 🤖"
 date: 2025-06-28
 tags: ["artificial intelligence", "book"]
 showToc: true
-draft: true
+draft: false
 TocOpen: false
 hidemeta: false
 comments: false
