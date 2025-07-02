@@ -78,10 +78,13 @@ params:
   # https://fusejs.io/api/options.html
   fuseOpts:
     isCaseSensitive: false
+    ignoreDiacritics: true
+    includeMatches: true
+    useExtendedSearch: true
     shouldSort: true
     location: 0
-    distance: 1000
-    threshold: 0.3
+    distance: 100
+    threshold: 0.1
     limit: 5
     minMatchCharLength: 0
     # limit: 10 # refer: https://www.fusejs.io/api/methods.html#search
