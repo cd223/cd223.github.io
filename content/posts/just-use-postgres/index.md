@@ -1,6 +1,6 @@
 ---
 title: "Just Use Postgres 🐘"
-date: 2025-07-05
+date: 2025-07-06
 tags: ["postgres", "databases", "architecture"]
 showToc: true
 draft: true
@@ -18,9 +18,9 @@ ShowRssButtonInSectionTermList: true
 UseHugoToc: true
 ---
 
-A common adage for any developer choosing a database technology is _"just use Postgres"_. Whilst this advice is well-intended, it needs revisiting in 2025. With all the recent innovations and acquisitions, Postgres providers are behaving like JavaScript frameworks of the 2010s (with a new one to consider every 6 months).
+A common adage for any developer choosing a database technology is _"just use Postgres"_. While this advice remains well-intentioned, it deserves a fresh look in 2025. Thanks to a wave of recent innovations and acquisitions, PostgreSQL providers now resemble JavaScript frameworks of the 2010s - there’s seemingly a new one to consider every six months.
 
-Just choosing Postgres isn’t enough anymore - there is an _entirely new decision tree_ to follow before you can launch a system. 🌳
+Just choosing PostgreSQL isn’t enough anymore - there is an _entirely new decision tree_ to follow before you can launch a system. 🌳
 
 {{< callout type="note" title="" >}}
 **TL;DR**: The answer to _"Which one do I choose?"_ is always _"It depends"_, but this post signposts exactly what those deciding factors are. ⚖️ 
@@ -79,17 +79,17 @@ Postgres pre-dates the age of cloud and distributed systems. As such, it is mono
 Besides scalability, the other by-products of standalone storage are [database branching](https://neon.com/docs/introduction/branching) and [fast backups](https://aws.amazon.com/blogs/aws/amazon-aurora-fast-database-cloning/) due to copy-on-write semantics. These are game-changing features that a traditional Postgres system cannot provide. 
 
 #### Relaxing Isolation for Speed 🏎️
-Postgres is flexible in supporting 4 levels of [transaction isolation](https://www.postgresql.org/docs/current/transaction-iso.html) at session or transaction level. It turns out that if we constrain the level of isolation to nothing stronger than `Repeatable Read` (using something like Snapshot Isolation) rather than `Serializable`, we require far less consensus before transactions can commit or return data.     
+Postgres is flexible in supporting 4 levels of [transaction isolation](https://www.postgresql.org/docs/current/transaction-iso.html) at session or transaction level. By constraining the isolation level to `Repeatable Read` (using something like Snapshot Isolation) rather than `Serializable`, we require far less consensus before transactions can commit or return data.     
 
 In most applications, the key-set of data being read is far greater than the key-set of data being written, and reads outnumber writes by an order of magnitude. This realisation along with constraining isolation level to `Repeatable Read` is core to the [way AWS DSQL scales](https://brooker.co.za/blog/2024/12/17/occ-and-isolation.html). By constraining in one dimension, new technologies are unlocking scale that a traditional setup could not match.
 
 #### New Data Primitives 📊️
-Being a general purpose and extensible database, some providers have imposed an opinionated abstraction on top of core Postgres. For example, TigerData introduces [`hypertables`](https://docs.tigerdata.com/use-timescale/latest/hypertables/) to model time-series data, which would otherwise require boilerplate database partitioning and scheduled pruning jobs through [`pg_partman`](https://github.com/pgpartman/pg_partman) and [`pg_cron`](https://github.com/citusdata/pg_cron).  
+Being a general purpose and extensible database, some providers have imposed an opinionated abstraction on top of core Postgres. For example, TigerData introduces [`hypertables`](https://docs.tigerdata.com/use-timescale/latest/hypertables/) to model time-series data, which would otherwise need manual partitioning and regular pruning via extensions like [`pg_partman`](https://github.com/pgpartman/pg_partman) and [`pg_cron`](https://github.com/citusdata/pg_cron).  
 
 AI companies make use of vector stores (through [`pgvector`](https://github.com/pgvector/pgvector) and [HNSW indexes](https://medium.com/@wtaisen/hnsw-indexing-in-vector-databases-simple-explanation-and-code-3ef59d9c1920)) to build RAG (Retrieval Augmented Generation) pipelines. The recent Databricks and Snowflake acquisitions show that engineers increasingly value an "all-in-one" platform rather than a standalone OLAP solution.
 
 {{< callout type="note" title="" >}}
-If you are new to Postgres, I recommend [Hussein Nasser](https://www.youtube.com/@hnasr)'s YouTube channel, which has a short video explaining the Postgres internals.
+If you are new to Postgres, I recommend [Hussein Nasser](https://www.youtube.com/@hnasr)'s YouTube channel, which has a detailed video explaining the Postgres internals.
 {{< /callout >}}
 {{< youtube id="Q56kljmIN14" start=0 loading="lazy" autoplay=false >}}
 
@@ -120,15 +120,15 @@ This section raises a set of questions I would consider when evaluating a Postgr
 - How much trust do you place in the company in the long term? _(Cloud providers may sunset services but have better longevity. Newer providers may withdraw their free tier, or be acquired and change pricing)._  
 - What encryption and security models exist? _(Is my infrastructure pooled or isolated? Can I rotate encryption keys used?)._
 - Is there support for multi-tenancy or Row-Level Security (RLS)? _([Nile](https://www.thenile.dev/) aims to address this for B2B SaaS firms)._
-- Is downtime expected? _(e.g., During scaling events / maintenance windows)._
+- What SLAs exist - is downtime expected or compensated? _(e.g., During scaling events / maintenance windows)._
 
 ### Starting Point 📍
 Having raised the important questions, it is clear that there is a lot to think about upfront. In the absence of any other information (and to avoid being overwhelmed!), I would adopt these principles.
 
-1. **Stay close to the roots 🪾**: Maintain as much runtime compatibility as possible, for as long as possible. This makes local testing and feedback loops much quicker.
+1. **Stay close to the roots 🪾**: Maintain runtime compatibility with standard PosrgreSQL for as long as possible. This makes local testing and feedback loops much quicker, and means faster adoption of new versions.
 1. **Benchmark 📐**: Measure against your own workloads - do not rely solely on online benchmarks.
-1. **Avoid sprawl 🐙**: Early on, default to your existing Postgres instance for new use cases before reaching for new platforms or databases.
-2. **Know your options 🧠**: Periodically evaluate which migration paths exist, upgrade timelines, tenancy models and trends.
+1. **Avoid sprawl 🐙**: Default to Postgres for new use cases before reaching for new platforms or databases.
+2. **Know your options 🧠**: Periodically evaluate which migration paths exist, their upgrade timelines, tenancy models and trends.
 
 Once a solution is adopted at scale, migration to a new setup is always possible, but it takes significant effort (just ask [Figma](https://www.figma.com/blog/how-figmas-databases-team-lived-to-tell-the-scale/)). There is no way to know the future, but with these principles in mind you will do better than most at adopting the right flavour of Postgres for your use case.
 
