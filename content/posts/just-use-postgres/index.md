@@ -1,9 +1,9 @@
 ---
 title: "Just Use Postgres 🐘"
-date: 2025-07-07
+date: 2025-07-06
 tags: ["postgres", "databases", "architecture"]
 showToc: true
-draft: true
+draft: false
 TocOpen: false
 hidemeta: false
 comments: false
@@ -71,7 +71,7 @@ This is a good opportunity to preach the lessons from [_Data Intensive Applicati
 {{< /callout >}}
 
 ### Recent Trends 🔨
-In this section we go over the main innovations that have emerged in recent years, which have caused the explosion in providers, each with their own unique offerings. As Postgres is open-source, it is possible to cherry-pick features and compromise on some fundamental aspects in order to unlock new behaviours.
+In this section, we go over the main innovations that have emerged in recent years, which have caused the explosion in providers, each with their own unique offerings. As Postgres is open-source, it is possible to cherry-pick features and compromise on some fundamental aspects in order to unlock new behaviours.
 
 #### Compute <> Storage Divide ➗
 Postgres pre-dates the age of cloud and distributed systems. As such, it is monolithic (combining storage and compute on the same server) and process-oriented (rather than [thread-oriented](https://engineeringatscale.substack.com/p/will-postgresql-switch-to-a-thread)). To thrive in a cloud-native world, providers have [decoupled](https://thenewstack.io/new-oltp-postgres-with-separate-compute-and-storage/) storage and compute layers, which allows each layer to scale independently. This change enables [serverless](https://jack-vanlightly.com/analyses/2023/11/15/neon-serverless-postgresql-asds-chapter-3) systems like Neon and AWS Aurora Serverless. Use of durable block storage like S3 means lightweight VMs can run the Query Engine and hold minimal state, allowing horizontal scalability. Different systems embrace this to different extents. For example, Aurora Serverless v2 incurs a 15 second cold-start when [scaling up from zero](https://aws.amazon.com/blogs/database/introducing-scaling-to-0-capacity-with-amazon-aurora-serverless-v2/).
