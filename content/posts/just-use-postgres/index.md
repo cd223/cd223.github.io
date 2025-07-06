@@ -94,33 +94,37 @@ If you are new to Postgres, I recommend [Hussein Nasser](https://www.youtube.com
 {{< youtube id="Q56kljmIN14" start=0 loading="lazy" autoplay=false >}}
 
 ### Decision Points ⚖️
-This section raises a set of questions I would consider when evaluating a Postgres provider to reduce a lot of future pain points. They are not ordered by priority.
+This section raises a set of questions I would consider when evaluating a Postgres provider to reduce a lot of future pain points. They are not ordered by priority. Click to expand/collapse each section.
 
-#### Query Patterns ❓
+{{< callout type="note" title="Query Patterns ❓" collapse="true" >}}
 - What is the expected ratio of reads and writes - is a single instance sufficient? _(Does the provider offer a range of instance sizes? Are there read replicas, connection poolers or sharding solutions?)_
 - What periods of inactivity am I expecting? _(Serverless is more economically-viable for spiky workloads. In practice, when baseline traffic varies by at least 50% from its peak.)_
 - What levels of transaction isolation will I need? _(This rules out a few distributed offerings.)_
 - Does the provider have global endpoints / multi-region support? _(Local benchmarks are no good if your database is on the other side of the world)._
+{{< /callout >}}
 
-#### Compatibility 💘
+{{< callout type="note" title="Compatibility 💘" collapse="true" >}}
 - Do we need runtime compatibility, wire-protocol, or [something in between](https://www.yugabyte.com/postgresql/compare-postgresql-compatibility/)? _(How many Postgres features will I have support for?)._
 - What service limitations exist? _(e.g., [Limits](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Extensions.html) on database object counts, concurrent connections, foreign keys, transaction size or timings)._
 - What extensions are available? _(e.g., Cloud platforms often expose only a [subset](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Extensions.html))._
-- Are system tables accessible, or can I easily monitor diagnostic information? _(e.g., `pg_stat-*` tables)._ 
+- Are system tables accessible, or can I easily monitor diagnostic information? _(e.g., `pg_stat-*` tables)._
 - What integrations exist with existing services? _(e.g., Cloud providers offer archival or "zero-ETL" features)._
+{{< /callout >}}
 
-#### Control 💪
+{{< callout type="note" title="Control 💪" collapse="true" >}}
 - Does a `superuser` exist? _(Some platforms [do not provide](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Appendix.PostgreSQL.CommonDBATasks.html) access)._
 - How portable is my data? _(Can the underlying backups and data files be exported externally?)._
 - How much control do we need over major versions' adoption timelines? _(Vendors often enforce a [support window](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/extended-support.html))._
 - What methods are supported for upgrades? _(e.g., In-place, logical replication, zero-downtime. Providers like YugabyteDB claim to have zero-downtime upgrades. Others need [DIY solutions](https://www.instantdb.com/essays/pg_upgrade))._
-- What is the pricing model? _(Is billing broken down by storage, compute and I/O?)._ 
+- What is the pricing model? _(Is billing broken down by storage, compute and I/O?)._
+{{< /callout >}}
 
-#### Security & Risk 🎲
-- How much trust do you place in the company in the long term? _(Cloud providers may sunset services but have better longevity. Newer providers may withdraw their free tier, or be acquired and change pricing)._  
+{{< callout type="note" title="Security & Risk 🎲" collapse="true" >}}
+- How much trust do you place in the company in the long term? _(Cloud providers may sunset services but have better longevity. Newer providers may withdraw their free tier, or be acquired and change pricing)._
 - What [encryption](https://www.crunchydata.com/blog/data-encryption-in-postgres-a-guidebook) and security models exist? _(Is my infrastructure pooled or isolated? Can I rotate encryption keys used?)._
 - Is there support for multi-tenancy or Row-Level Security (RLS)? _([Nile](https://www.thenile.dev/) aims to address this for B2B SaaS firms)._
 - What SLAs exist and is downtime compensated? _(e.g., During scaling events / maintenance windows)._
+{{< /callout >}}
 
 ### Starting Point 📍
 Having raised the important questions, it is clear that there is a lot to think about upfront. In the absence of any other information (and to avoid being overwhelmed!), I would adopt these principles.
