@@ -1,6 +1,6 @@
 ---
 title: "Just Use Postgres 🐘"
-date: 2025-07-06
+date: 2025-07-07
 tags: ["postgres", "databases", "architecture"]
 showToc: true
 draft: true
@@ -74,7 +74,7 @@ This is a good opportunity to preach the lessons from [_Data Intensive Applicati
 In this section we go over the main innovations that have emerged in recent years, which have caused the explosion in providers, each with their own unique offerings. As Postgres is open-source, it is possible to cherry-pick features and compromise on some fundamental aspects in order to unlock new behaviours.
 
 #### Compute <> Storage Divide ➗
-Postgres pre-dates the age of cloud and distributed systems. As such, it is monolithic (combining storage and compute on the same server) and process-oriented (rather than [thread-oriented](https://engineeringatscale.substack.com/p/will-postgresql-switch-to-a-thread)). To thrive in a cloud-native world, providers have decoupled storage and compute layers, which allows each layer to scale independently. This change enables [serverless](https://jack-vanlightly.com/analyses/2023/11/15/neon-serverless-postgresql-asds-chapter-3) systems like Neon and AWS Aurora Serverless. Use of durable block storage like S3 means lightweight VMs can run the Query Engine and hold minimal state, allowing horizontal scalability. Different systems embrace this to different extents. For example, Aurora Serverless v2 incurs a 15 second cold-start when [scaling up from zero](https://aws.amazon.com/blogs/database/introducing-scaling-to-0-capacity-with-amazon-aurora-serverless-v2/).
+Postgres pre-dates the age of cloud and distributed systems. As such, it is monolithic (combining storage and compute on the same server) and process-oriented (rather than [thread-oriented](https://engineeringatscale.substack.com/p/will-postgresql-switch-to-a-thread)). To thrive in a cloud-native world, providers have [decoupled](https://thenewstack.io/new-oltp-postgres-with-separate-compute-and-storage/) storage and compute layers, which allows each layer to scale independently. This change enables [serverless](https://jack-vanlightly.com/analyses/2023/11/15/neon-serverless-postgresql-asds-chapter-3) systems like Neon and AWS Aurora Serverless. Use of durable block storage like S3 means lightweight VMs can run the Query Engine and hold minimal state, allowing horizontal scalability. Different systems embrace this to different extents. For example, Aurora Serverless v2 incurs a 15 second cold-start when [scaling up from zero](https://aws.amazon.com/blogs/database/introducing-scaling-to-0-capacity-with-amazon-aurora-serverless-v2/).
 
 Besides scalability, the other by-products of standalone storage are [database branching](https://neon.com/docs/introduction/branching) and [fast backups](https://aws.amazon.com/blogs/aws/amazon-aurora-fast-database-cloning/) due to copy-on-write semantics. These are game-changing features that a traditional Postgres system cannot provide. 
 
@@ -118,9 +118,9 @@ This section raises a set of questions I would consider when evaluating a Postgr
 
 #### Security & Risk 🎲
 - How much trust do you place in the company in the long term? _(Cloud providers may sunset services but have better longevity. Newer providers may withdraw their free tier, or be acquired and change pricing)._  
-- What encryption and security models exist? _(Is my infrastructure pooled or isolated? Can I rotate encryption keys used?)._
+- What [encryption](https://www.crunchydata.com/blog/data-encryption-in-postgres-a-guidebook) and security models exist? _(Is my infrastructure pooled or isolated? Can I rotate encryption keys used?)._
 - Is there support for multi-tenancy or Row-Level Security (RLS)? _([Nile](https://www.thenile.dev/) aims to address this for B2B SaaS firms)._
-- What SLAs exist - is downtime expected or compensated? _(e.g., During scaling events / maintenance windows)._
+- What SLAs exist and is downtime compensated? _(e.g., During scaling events / maintenance windows)._
 
 ### Starting Point 📍
 Having raised the important questions, it is clear that there is a lot to think about upfront. In the absence of any other information (and to avoid being overwhelmed!), I would adopt these principles.
