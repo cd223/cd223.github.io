@@ -67,7 +67,7 @@ _Image credit: [TigerData](https://www.tigerdata.com/blog/how-to-collapse-your-s
 
 {{< callout type="warning" title="Cautionary Tales ⚠️" collapse="false" >}}
 Choosing Postgres over other relational databases doesn't always go to plan. Uber famously [switched](https://www.uber.com/en-GB/blog/postgres-to-mysql-migration/) to MySQL after facing slowness during writes, favouring the way MySQL handles index updates. Other systems have [faced issues](https://www.cs.cmu.edu/~pavlo/blog/2023/04/the-part-of-postgresql-we-hate-the-most.html) such as table bloat and transaction ID wraparound due to Postgres’s MVCC model, which avoids locks in favor of versioning.
-This is a good opportunity to preach the lessons from [_Data Intensive Applications_](https://www.oreilly.com/library/view/designing-data-intensive-applications/9781491903063/). Without understanding the underlying storage and retrieval technology these databases rely on, you are likely to face surprises in Production.
+This is a good opportunity to preach the lessons from [_Designing Data Intensive Applications_](https://www.oreilly.com/library/view/designing-data-intensive-applications/9781491903063/). Without understanding the underlying storage and retrieval technology these databases rely on, you are likely to face surprises in Production.
 {{< /callout >}}
 
 ### Recent Trends 🔨
