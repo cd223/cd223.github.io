@@ -66,6 +66,8 @@ params:
       url: "https://github.com/cd223"
     - name: x
       url: "https://x.com/c_davies21"
+    - name: medium
+      url: "https://medium.com/@chrisdavies870"
     - name: devto
       url: "https://dev.to/chris_davies"
 
