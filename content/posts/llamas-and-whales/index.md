@@ -36,6 +36,8 @@ messages = [
 - Thought, Act, Observe cycle / ReAct (CoT) - (enclosed between <think> and </think> special tokens). 
 - "Stop and parse" - JSON or code
 - [smolagents](https://huggingface.co/blog/smolagents)
+- https://huggingface.co/spaces/agents-course/First_agent_template/tree/main
+- CodeAgent vs ToolCallingAgent - https://github.com/huggingface/smolagents/blob/main/src/smolagents/agents.py#L756-L761
 
 ### The setup
 Ollama:  it downloads a model file that contains all the weights, architecture config, and tokenizer. This is often:
