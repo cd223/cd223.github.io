@@ -85,6 +85,8 @@ Plugins/Agents = Apps: Extend functionality—LLMs can “install” skills and 
 
 Ollama: It downloads a model file that contains all the weights, architecture config, and tokenizer. This is often:
 
+https://threadreaderapp.com/thread/1943837550369812814.html
+
 | Framework                           | Purpose                                                                                                                                                                                                                   |
 |-------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Ollama**                          | A lightweight runtime for running large language models (like LLaMA, Mistral, etc.) locally with minimal setup. Designed for ease-of-use and local development, especially on Mac/Windows/Linux.                          |
