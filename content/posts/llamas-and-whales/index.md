@@ -1,6 +1,6 @@
 ---
 title: "Taming Llamas, Parrots & Whales 🦙🦜🐳"
-date: 2025-07-14
+date: 2025-07-15
 tags: ["artificial intelligence", "programming"]
 showToc: true
 draft: true
@@ -51,6 +51,37 @@ messages = [
 - CodeAgent vs ToolCallingAgent - https://github.com/huggingface/smolagents/blob/main/src/smolagents/agents.py#L756-L761
 - https://www.anthropic.com/engineering/building-effective-agents
 - https://simonwillison.net/2025/Jul/6/supabase-mcp-lethal-trifecta/
+- https://www.youtube.com/watch?app=desktop&v=zjkBMFhNj_g 
+- Crawl, walk, run: https://www.infoq.com/presentations/micro-metrics-llm/?utm_source=email&utm_medium=ai-ml-data-eng&utm_campaign=newsletter&utm_content=07082025
+- Base + assistant models: e.g. Llama
+- https://proceedings.neurips.cc/paper_files/paper/2022/file/c1e2faff6f588870935f114ebe04a3e5-Paper-Conference.pdf
+
+- Stage 1: Pretraining (Yearly Cycle)
+📥 Download ~10TB of text data
+🖥️ Use ~6,000 GPUs in a compute cluster
+🧠 Train a large neural network (costs ~$2M, takes ~12 days)
+✅ Result: a base model
+
+Stage 2: Finetuning (Weekly Cycle)
+✍️ Write detailed labeling instructions
+👥 Hire annotators (or use services like scale.ai)
+📊 Collect 100K+ high-quality Q&A samples or comparisons (e.g. RLHF)
+🔁 Finetune base model on this data (~1 day)
+✅ Result: an assistant model
+🧪 Run extensive evaluations
+🚀 Deploy
+🔎 Monitor performance, gather failure cases, iterate
+
+- LLM OS: 
+- LLM = CPU: Central processor making decisions, generating text, and managing tasks.
+
+Context Window = RAM: Temporary working memory—what the LLM can "think about" at once.
+Tools = Software: Accesses classical tools like calculators, terminals, Python interpreters.
+File System = Disk: Stores memory, embeddings, and long-term knowledge.
+Browser & APIs = Network Access: Lets the LLM browse, pull data, or interact with other LLMs.
+Video/Audio I/O = Peripherals: Enables vision, speech, music generation.
+Plugins/Agents = Apps: Extend functionality—LLMs can “install” skills and self-improve.
+👉 In short: The LLM is becoming a general-purpose platform, much like an OS, capable of reasoning, perceiving, acting, and improving across many domains.
 
 Ollama: It downloads a model file that contains all the weights, architecture config, and tokenizer. This is often:
 
