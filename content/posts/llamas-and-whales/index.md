@@ -55,6 +55,9 @@ messages = [
 - Crawl, walk, run: https://www.infoq.com/presentations/micro-metrics-llm/?utm_source=email&utm_medium=ai-ml-data-eng&utm_campaign=newsletter&utm_content=07082025
 - Base + assistant models: e.g. Llama
 - https://proceedings.neurips.cc/paper_files/paper/2022/file/c1e2faff6f588870935f114ebe04a3e5-Paper-Conference.pdf
+- https://decodingml.substack.com/p/stop-building-ai-agents?utm_source=tldrwebdev
+- https://www.infoq.com/articles/agentic-ai-architecture-framework/
+- https://hamel.dev/blog/posts/evals/index.html
 
 - Stage 1: Pretraining (Yearly Cycle)
 📥 Download ~10TB of text data
