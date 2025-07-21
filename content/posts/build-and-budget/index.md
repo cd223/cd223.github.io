@@ -1,6 +1,6 @@
 ---
 title: "You build it, you budget it 💰"
-date: 2025-07-22
+date: 2025-07-21
 tags: ["aws", "cloud", "finops"]
 showToc: true
 draft: true
@@ -26,7 +26,7 @@ Money can be a taboo topic, and can often feel far-removed from an engineers' re
 
 In this post, we look at what a _"you build it, you **budget** it"_ philosophy might look like.
 
-{{< imgresize src="shovel-costs.gif" width="450" height="300" alt="Shovelling money into the Cloud" >}}
+{{< imgresize src="shovel-costs.gif" width="450" height="300" alt="Shovelling money into the Furnace" >}}
 _Companies like [37signals](https://basecamp.com/cloud-exit) have been vocal about their cloud exit, presumably feeling like this when it came to paying the invoice._
 
 {{< callout type="note" title="\"Frivolous\" Figma 🤑" collapse="false" >}}
@@ -41,12 +41,17 @@ It is understandable why many organizations implicitly prioritise availability o
 1. **Maturity**: Startups desperately need market fit before they can set up a rigid FinOps strategy.
 1. **Cost**: The ironic one - engineers are expensive, so having them purely focus on this is not a differentiator.
 
-The key caveat to all of this, is many meaningful opportunities arise in the **intersection** of what Product and Platform Engineering teams can achieve alone.
+Many organizations choose to divide teams into Product and Platform responsibilities as a way of creating abstraction. As [Conway's Law](https://en.wikipedia.org/wiki/Conway%27s_law) describes, by doing this you end up in a state where developers shipping features do not understand the infrastructure that their code runs on. Greater freedom at the infrastructure level may mean less scrutiny on hosting costs for developers who aren't operating at that level.
 
-Many organizations choose to divide teams into Product and Platform responsibilities as a way of creating abstraction. As Conway's Law describes, by doing this you end up in a state where developers shipping features do not understand the infrastructure that their code runs on. Greater freedom at the infrastructure level may mean less scrutiny on hosting costs for developers who aren't operating at that level.
+The key caveat to all of this, is that many meaningful opportunities arise in the **intersection** of what Product and Platform Engineering teams can achieve alone.
+
+{{< imgresize src="platform-product-venn.png" width="890" height="477" alt="The Platform-Product Venn diagram" >}}
+_A simplified model - responsibilities will vary by org, with impactful efforts in the overlap._
 
 ### Optimisation Hunting 🤠
 In a series of efforts spanning a few Quarters, we managed to reduce our company AWS spend by 40%. This was no mean feat, but now it's done, I can look back and bucket the different optimizations into a few categories.
+
+What should become clear is that _every single one of these_ optimisations require some level of communication between Platform and Product to gather data, get buy-in and keep teams in the loop in case of outages.
 
 {{< callout type="note" title="No-brainers 🧠" collapse="true" >}}
 Settings which should arguably be defaults. Once enabled, they are immediately effective.
@@ -90,8 +95,6 @@ Settings which should arguably be defaults. Once enabled, they are immediately e
 
 **Ownership**: Platform
 {{< /callout >}}
-
-What should become clear is that _every single one of these_ optimisations require some level of communication between Platform and Product to gather data, get buy-in and keep teams in the loop in case of outages.
 
 ### Shifting Left ⏪
 Let's look at some practical ways that Engineers could take greater ownership of costs. 
