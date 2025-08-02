@@ -1,6 +1,6 @@
 ---
 title: "Taming Llamas, Parrots & Whales 🦙🦜🐳"
-date: 2025-07-25
+date: 2025-08-10
 tags: ["artificial intelligence", "programming"]
 showToc: true
 draft: true
