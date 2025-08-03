@@ -1,6 +1,6 @@
 ---
 title: "You build it, you budget it? 💰"
-date: 2025-08-02
+date: 2025-08-03
 tags: ["aws", "cloud", "finops"]
 showToc: true
 draft: true
@@ -18,13 +18,16 @@ ShowRssButtonInSectionTermList: true
 UseHugoToc: true
 ---
 
-Figma's recent S-1 filing was called out in a [flurry](https://www.infoq.com/news/2025/07/figma-aws-300k-daily-bill/) [of](https://www.datacenterdynamics.com/en/news/design-platform-figma-spends-300000-on-aws-daily/) [headlines](https://news.ycombinator.com/item?id=44462016) for declaring a spend of _"$300,000 a day"_ on AWS. At face value, that number seems shocking, but perhaps the industry _reaction itself_ is the main thing worth examining.  
+Figma's recent S-1 filing was called out in a [flurry](https://www.infoq.com/news/2025/07/figma-aws-300k-daily-bill/) [of](https://www.datacenterdynamics.com/en/news/design-platform-figma-spends-300000-on-aws-daily/) [headlines](https://news.ycombinator.com/item?id=44462016) for declaring a spend of _"$300,000 a day"_ on AWS. At face value, that number seems shocking, but perhaps the industry _reaction itself_ is the main thing worth examining. 
 
 Many organizations subscribe to the "_[you build it, you **run** it](https://www.thoughtworks.com/en-gb/insights/decoder/y/you-build-it-you-run-it)_" operating model, but this ownership _rarely_ extends to costs. When was the last time your pager went off in the night because a service experienced an unusual spike in costs? ☎️🧑‍🚒
 
-Money can be a taboo topic, and can often feel far-removed from an engineers' remit. The reality is, behind staffing costs, hosting costs are one of the biggest line items for a business, and [FinOps](https://www.finops.org/) is one of the few engineering disciplines where you can know your impact on the bottom line within 24 hours.
+Cost-management can often feel far-removed from an engineer's remit. The reality is, behind staffing costs, hosting costs are one of the biggest line items for a business, and [FinOps](https://www.finops.org/) is one of the few engineering disciplines where you can know your impact on the bottom line within 24 hours.
 
-In this post, we look at what why costs are a shared responsibility and what developers (and tooling providers) can do to help own them. 
+In this post, we look at:
+1. Why costs are a shared responsibility.
+1. What developers (and tooling providers) can do to help own them. 
+1. The vendor "lock-in" trade-off.
 
 {{< imgresize src="shovel-costs.gif" width="450" height="300" alt="Shovelling money into the Furnace" >}}
 _Companies like [37signals](https://basecamp.com/cloud-exit) have been vocal about their cloud exit, presumably feeling like this when it came to paying the invoice._
@@ -44,88 +47,91 @@ It is understandable why many organizations implicitly prioritise availability o
 ### Conway's Law: A limiting factor? ⚖️
 Many organizations choose to divide teams into Product and Platform responsibilities as a way of creating abstraction. As [Conway's Law](https://en.wikipedia.org/wiki/Conway%27s_law) describes, the system architecture becomes a representation of the organization structure.  This results in situations where developers shipping features often do not understand the infrastructure that their code runs on. Greater abstraction means freedom at the infrastructure level, but also means less scrutiny on hosting costs for developers who aren't operating at that level of the stack.
 
-The key trade-off in these team boundaries, is that many meaningful cost optimization opportunities arise in the **intersection** of what Product and Platform Engineering teams can achieve alone.
+The key trade-off in these team boundaries, is that many meaningful cost optimization opportunities arise in the **intersection** of what Product and Platform Engineering teams can achieve alone. If the responsibility to optimise costs lie with a central team, the goal becomes a moving target as micro-level decisions elsewhere slowly negate the impact of planned work. Efforts significantly reduce if a culture of awareness/ownership exists across teams. 
 
 {{< imgresize src="platform-product-venn.png" width="890" height="477" alt="The Platform-Product Venn diagram" >}}
 _A simplified model - responsibilities will vary by org, with impactful efforts sitting in the overlap._
 
 ### Optimisations require partnership 🤝
-In a series of project spanning a few quarters, we managed to reduce our AWS spend by 40%. This was no mean feat, but the main takeaway was that _every optimisation_ required communication between Platform and Product teams. Whether this was in gathering data, getting buy-in or keeping teams in the loop in case of outages.
+Let's look at some common types of optimisation, and the level of their cross-team dependencies.
 
-{{< callout type="note" title="Infrastructure settings ⚙️" collapse="true" >}}
+In a series of projects spanning a few quarters, we managed to reduce our AWS spend by 40%. This was no mean feat, but a key lesson was that _every optimisation_ required communication between Platform and Product teams. Whether gathering data, getting buy-in or keeping teams in the loop in case of unexpected outages.
+
+{{< callout type="note" title="Settings ⚙️" collapse="true" >}}
 Settings which are low-effort to change, and should arguably be defaults. Once enabled, they are immediately effective.
 
-**e.g.**: Intelligent tiering, Bucket Keys, Graviton
+**e.g.**: [Intelligent tiering](https://aws.amazon.com/s3/storage-classes/intelligent-tiering/), [Bucket encryption keys](https://docs.aws.amazon.com/AmazonS3/latest/userguide/bucket-key.html), [Graviton](https://docs.aws.amazon.com/prescriptive-guidance/latest/optimize-costs-microsoft-workloads/net-graviton.html), [Log classes](https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CloudWatch_Logs_Log_Classes.html)
 {{< /callout >}}
 
-{{< callout type="note" title="Spring-cleaning 🧹" collapse="true" >}}
-...
+{{< callout type="note" title="Cleanup 🧹" collapse="true" >}}
+Reducing the footprint of compute services and managing the lifetime of data.
 
-**e.g.**: Unused services, Lifecycle policies, TTLs, job reapers
+**e.g.**: Unused services, [Lifecycle policies](https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-lifecycle-mgmt.html), [TTLs](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/TTL.html), [job timeouts](https://docs.aws.amazon.com/batch/latest/userguide/job_timeouts.html)
 {{< /callout >}}
 
 {{< callout type="note" title="Right-sizing 🤏" collapse="true" >}}
-...
+Matching the reserved capacity of compute services as closely to their usage as possible.   
 
-**e.g.**: Capacity, serverless
+**e.g.**: Customising capacity, removing redundant instances, serverless
 {{< /callout >}}
 
 {{< callout type="note" title="Re-architecting 🎲" collapse="true" >}}
-...
+Changing the operating model or system architecture of a service, accepting a reasonable trade-off (e.g. performance, availability) for a significant cost reduction. 
 
-**e.g.**: Spot compute, middleware, removing failover instances
+**e.g.**: Removing middleware (e.g. queues/routing/proxies), using [Spot compute](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-spot-instances.html)
 {{< /callout >}}
 
-{{< callout type="note" title="Application changes 🧩" collapse="true" >}}
-...
+{{< callout type="note" title="Code changes 🧩" collapse="true" >}}
+Modifying the behaviour of application code to alter its usage of resources (e.g., databases, storage, APIs).
 
-**e.g.**: Caching, network chatter, database access patterns, logging
+**e.g.**: Caching, "pushing down" data filtering, changing storage/API access patterns, reducing logging
 {{< /callout >}}
+
+Life is also made significantly easier if Product-focused teams can readily help explain _ongoing cost changes_ (e.g., a new client onboard, a recent feature rollout etc.). If revenue increases proportionally, it becomes less of a concern and budgets can be adjusted to the new baseline.
 
 ### Shifting left ⏪
-Not every developer needs to take on large optimisation projects to impact costs. Let's look at some practical ways that Engineers could take greater ownership. 
+So far we have only touched on _optimisations_. With greater ownership across teams, we can shift a lot of these concerns "left", earlier in the development cycle. 
 
-#### Dashboards 📊
+Not every developer needs to take on large, multi-week optimisation projects to be seen as "owning" costs. Let's look at some practical ways that tools and innovations could enable cost ownership earlier on in systems development. 
+
+#### Observability 📊
+System usage
+Third party dependencies (SaaS)
 Cost explorer
+APIs - anomalies, incidents
+Budgets / revenue
+
+#### Designs 🎨
+- ADRs
+- Internal blogs / knowledge shares - repeating what has happened
+- Mental model
+
+{{< callout type="note" title="Cloud Cost Mental Model 💲" collapse="true" >}}
+- Compute = (Capacity * Time)
+- Storage = (Retention * Data Size) + Data Transferred
+- Logging = (Events * Size)
+{{< /callout >}}
 
 #### Tooling 🛠️
 - https://docs.datadoghq.com/developers/ide_plugins/idea/
 - https://www.infracost.io/
 - https://www.apptio.com/products/kubecost/?src=kc-com
 
-#### Designs 🎨
-ADRs
-
 #### Artificial Intelligence 🤖
-AI assistants:
-Kiro, Claude.md, CodeRabbit
+- Kiro, Claude.md, CodeRabbit
 
-### Locked in? 🔐
-A lot of the scrutiny of Figma's figures came from their $500m multi-year commitment to AWS, admitting their reliance on a sole provider. Many fail to consider the opportunity cost of not doubling down on that commitment.
+### "Lock-in": Helpful or harmful? 🔐
+Another topic raised by the reaction to Figma's S-1 filing is vendor "lock-in". A lot of the scrutiny of Figma's figures came from their $500m multi-year commitment to AWS, admitting their reliance on a sole provider. Many do not consider the opportunity cost of not leveraging scale benefits of a long-term commitment.
 https://serverlessland.com/content/guides/refactoring-serverless/introduction
-
-### The budgeters' philosophy 💼
-Let's end on what I see a _"you build it, you budget it"_ philosophy like in practice.
-
-{{< callout type="note" title="Mental Model 💲" collapse="false" >}}
-- Compute = (Capacity * Time)
-- Storage = (Retention * Storage Tier) + Data Transfer + API calls
-- Logging = (Events * Size)
-{{< /callout >}}
-
-- Soft quotas
-- Cost anomalies
-- Cost incidents: same attention as outages.
-- ADRs
 
 ### Summary 🧵
 This post tried to cover a lot of ground. Here are my main takeaways:
 
-1. 💸 Costs are a **shared responsibility**, like availability, with a more immediate ROI. Delegating responsibility to a single platform/FinOps team leaves many optimisations off the table.
-1. 🔐 Lock-in and cloud commitments get a bad reputation, because it's harder to quantify the **opportunity cost** of not going "all-in". 
-1. 💻 Developer tooling and AI **shifts a lot of effort left**. Producing code will become less of bottleneck as more of this is delegated to machines. However, understanding how that code impacts system reliability and costs will only matter more. 
+1. 💸 Costs are a **shared responsibility** across development teams, like availability, with a more immediate ROI. Delegating responsibility to a single platform/FinOps team leaves many optimisations off the table, and may elongate projects.
+1. 💻 Developer tooling and AI can **shift a lot of effort left**. Producing code will become less of bottleneck as more of this responsibility is delegated to machines. However, understanding how that code impacts system reliability and costs will only matter more over time. 
+1. 🔐 "Lock-in" and cloud commitments get a bad reputation, because it's harder to quantify the **opportunity cost** of not going "all-in" on providers' offerings.
 
-In future posts, I may dive into some cost-saving measures I have seen in the wild. In the meantime, here are a few podcast recommendations:
+In future posts, I may dive into some neat cost-saving measures I have seen in the wild. In the meantime, here are a few podcast recommendations:
 - 🎧 [Screaming in the Cloud (Last Week in AWS)](https://www.lastweekinaws.com/podcast/)
 - 🎧 [Cloud Masters (DoIt)](https://www.doit.com/podcasts/cloud-masters/)
 
