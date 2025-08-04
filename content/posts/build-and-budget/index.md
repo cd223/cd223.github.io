@@ -1,6 +1,6 @@
 ---
 title: "You build it, you budget it? 💰"
-date: 2025-08-03
+date: 2025-08-05
 tags: ["aws", "cloud", "finops"]
 showToc: true
 draft: true
@@ -22,7 +22,7 @@ Figma's recent S-1 filing was called out in a [flurry](https://www.infoq.com/new
 
 Many organizations subscribe to the "_[you build it, you **run** it](https://www.thoughtworks.com/en-gb/insights/decoder/y/you-build-it-you-run-it)_" operating model, but this ownership _rarely_ extends to costs. When was the last time your pager went off in the night because a service experienced an unusual spike in costs? ☎️🧑‍🚒
 
-Cost-management can often feel far-removed from an engineer's remit. The reality is, behind staffing costs, hosting costs are one of the biggest line items for a business, and [FinOps](https://www.finops.org/) is one of the few engineering disciplines where you can know your impact on the bottom line within 24 hours.
+Cost management can often feel far-removed from an engineer's remit. The reality is, behind staffing costs, hosting costs are one of the biggest line items for a business, and [FinOps](https://www.finops.org/) is one of the few engineering disciplines where you can know your impact on the bottom line within 24 hours.
 
 In this post, we look at:
 1. Why costs are a shared responsibility.
@@ -60,31 +60,41 @@ In a series of projects spanning a few quarters, we managed to reduce our AWS sp
 {{< callout type="note" title="Settings ⚙️" collapse="true" >}}
 Settings which are low-effort to change, and should arguably be defaults. Once enabled, they are immediately effective.
 
-**e.g.**: [Intelligent tiering](https://aws.amazon.com/s3/storage-classes/intelligent-tiering/), [Bucket encryption keys](https://docs.aws.amazon.com/AmazonS3/latest/userguide/bucket-key.html), [Graviton](https://docs.aws.amazon.com/prescriptive-guidance/latest/optimize-costs-microsoft-workloads/net-graviton.html), [Log classes](https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CloudWatch_Logs_Log_Classes.html)
+**e.g.**: Using [Intelligent tiering](https://aws.amazon.com/s3/storage-classes/intelligent-tiering/), [Bucket encryption keys](https://docs.aws.amazon.com/AmazonS3/latest/userguide/bucket-key.html), different Platform architectures (e.g. [Graviton](https://docs.aws.amazon.com/prescriptive-guidance/latest/optimize-costs-microsoft-workloads/net-graviton.html)), Log [classes](https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CloudWatch_Logs_Log_Classes.html).
+
+**Dependencies**: Co-ordination is needed during testing and rollout to minimise impact on production environments.
 {{< /callout >}}
 
 {{< callout type="note" title="Cleanup 🧹" collapse="true" >}}
 Reducing the footprint of compute services and managing the lifetime of data.
 
-**e.g.**: Unused services, [Lifecycle policies](https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-lifecycle-mgmt.html), [TTLs](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/TTL.html), [job timeouts](https://docs.aws.amazon.com/batch/latest/userguide/job_timeouts.html)
+**e.g.**: Removing unused services, adding [Lifecycle policies](https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-lifecycle-mgmt.html), [TTLs](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/TTL.html), [job timeouts](https://docs.aws.amazon.com/batch/latest/userguide/job_timeouts.html)
+
+**Dependencies**: Much like [Hyrum's law](https://www.hyrumslaw.com/) for APIs, it is almost never clear which service or data is relied upon until it is deleted. Product teams can provide context on which service/data is valuable and for which initiatives/clients far quicker than metrics would alone. Metrics tell you the current state of the world - not what to expect in the near future.
 {{< /callout >}}
 
 {{< callout type="note" title="Right-sizing 🤏" collapse="true" >}}
 Matching the reserved capacity of compute services as closely to their usage as possible.   
 
-**e.g.**: Customising capacity, removing redundant instances, serverless
+**e.g.**: Changing CPU and memory (statically or dynamically), removing redundant instances, adopting serverless.
+
+**Dependencies**: If embracing serverless, there are fundamental limitations (e.g. memory, timeouts) that Product teams need to know about when shipping code. Right-sizing might mean use of horizontal or vertical scaling, which means choosing a sensible scaling strategy (e.g. scheduled, on-demand). This all requires crucial Product context.
 {{< /callout >}}
 
 {{< callout type="note" title="Re-architecting 🎲" collapse="true" >}}
 Changing the operating model or system architecture of a service, accepting a reasonable trade-off (e.g. performance, availability) for a significant cost reduction. 
 
-**e.g.**: Removing middleware (e.g. queues/routing/proxies), using [Spot compute](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-spot-instances.html)
+**e.g.**: Embracing event driven architecture ([EDA](https://aws.amazon.com/what-is/eda/)), removing middleware (e.g. queues/load balancers/proxies), using [Spot compute](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-spot-instances.html)
+
+**Dependencies**: ...
 {{< /callout >}}
 
 {{< callout type="note" title="Code changes 🧩" collapse="true" >}}
 Modifying the behaviour of application code to alter its usage of resources (e.g., databases, storage, APIs).
 
 **e.g.**: Caching, "pushing down" data filtering, changing storage/API access patterns, reducing logging
+
+**Dependencies**: ...
 {{< /callout >}}
 
 Life is also made significantly easier if Product-focused teams can readily help explain _ongoing cost changes_ (e.g., a new client onboard, a recent feature rollout etc.). If revenue increases proportionally, it becomes less of a concern and budgets can be adjusted to the new baseline.
@@ -95,6 +105,8 @@ So far we have only touched on _optimisations_. With greater ownership across te
 Not every developer needs to take on large, multi-week optimisation projects to be seen as "owning" costs. Let's look at some practical ways that tools and innovations could enable cost ownership earlier on in systems development. 
 
 #### Observability 📊
+...
+
 System usage
 Third party dependencies (SaaS)
 Cost explorer
@@ -102,6 +114,8 @@ APIs - anomalies, incidents
 Budgets / revenue
 
 #### Designs 🎨
+...
+
 - ADRs
 - Internal blogs / knowledge shares - repeating what has happened
 - Mental model
@@ -113,14 +127,20 @@ Budgets / revenue
 {{< /callout >}}
 
 #### Tooling 🛠️
+...
+
 - https://docs.datadoghq.com/developers/ide_plugins/idea/
 - https://www.infracost.io/
 - https://www.apptio.com/products/kubecost/?src=kc-com
 
 #### Artificial Intelligence 🤖
+...
+
 - Kiro, Claude.md, CodeRabbit
 
 ### "Lock-in": Helpful or harmful? 🔐
+...
+
 Another topic raised by the reaction to Figma's S-1 filing is vendor "lock-in". A lot of the scrutiny of Figma's figures came from their $500m multi-year commitment to AWS, admitting their reliance on a sole provider. Many do not consider the opportunity cost of not leveraging scale benefits of a long-term commitment.
 https://serverlessland.com/content/guides/refactoring-serverless/introduction
 
@@ -131,7 +151,9 @@ This post tried to cover a lot of ground. Here are my main takeaways:
 1. 💻 Developer tooling and AI can **shift a lot of effort left**. Producing code will become less of bottleneck as more of this responsibility is delegated to machines. However, understanding how that code impacts system reliability and costs will only matter more over time. 
 1. 🔐 "Lock-in" and cloud commitments get a bad reputation, because it's harder to quantify the **opportunity cost** of not going "all-in" on providers' offerings.
 
-In future posts, I may dive into some neat cost-saving measures I have seen in the wild. In the meantime, here are a few podcast recommendations:
+As always, context matters, so the next time we see a headline about an organization's cloud spend, it's always worth treating it with the nuance it deserves, rather than being outraged by the headlines.
+
+In future posts, I may dive into some neat cost management measures I have seen in the wild. In the meantime, here are a few podcast recommendations:
 - 🎧 [Screaming in the Cloud (Last Week in AWS)](https://www.lastweekinaws.com/podcast/)
 - 🎧 [Cloud Masters (DoIt)](https://www.doit.com/podcasts/cloud-masters/)
 
