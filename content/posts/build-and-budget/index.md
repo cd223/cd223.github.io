@@ -115,11 +115,12 @@ Modifying the behaviour of application code to alter its usage of resources (e.g
 {{< /callout >}}
 
 ### Shifting left ⏪
-So far we have only touched on _optimisations_ once costs are already a problem. With greater ownership across teams, we can shift a lot of these concerns "left" earlier in the development cycle, to reduce the size of future problems. Not every developer needs to take on large, multi-week optimisation projects to be seen as "owning" costs. 
+So far, we have only touched on _optimisations_ once costs are already a problem. With greater ownership across teams, we can shift a lot of these concerns "left" earlier in the development cycle, to reduce the size of future problems. Not every developer needs to take on large, multi-week optimisation projects to be seen as "owning" costs. 
 
-Giving teams _visibility_ of what a baseline looks like so they can consider costs is the first step.  If using a cloud provider, a lot of these primitives are provided out of the box.
-1. **Tagging**: Tag infrastructure by team/project/department. Regularly monitor Cost Explorer dashboards and schedule reports.
-1. **Alerting**: Set up budgets and anomaly detection, with integrations to the communication/incident management platforms (e.g. Slack -> incident.io).
+#### Observability 📊
+Giving teams _visibility_ of their baseline costs is the first step.  If using a cloud provider, a lot of these primitives are provided:
+1. **Tagging**: Label infrastructure by team/project. Regularly monitor Cost Explorer dashboards and schedule reports.
+1. **Alerting**: Set up budgets and anomaly detection, with integrations to the communication platforms (e.g. Slack & incident.io).
 1. **Dependencies**: Monitor usage metrics for each third-party provider / service / API that has its own pricing model.
 
 Once observability is in place, let's look at some practical methods that enable cost ownership earlier on in development. 
@@ -152,9 +153,16 @@ A range of tooling exists to target the IDE and Pull Request workflows, so
 - https://ethanding.substack.com/p/ai-subscriptions-get-short-squeezed
 
 ### "Lock-in": Friend or foe? 🔐
-...
-Another topic raised by the reaction to Figma's S-1 filing is vendor "lock-in". A lot of the scrutiny of Figma's figures came from their $500m multi-year commitment to AWS, admitting their reliance on a sole provider. Many do not consider the opportunity cost of not leveraging scale benefits of a long-term commitment.
-https://serverlessland.com/content/guides/refactoring-serverless/introduction
+The final topic we will touch on here is vendor _"lock-in"_. A lot of the scrutiny on Figma's IPO filings came from their $500m-per-year _multi-year_ commitment to AWS. By admitting their reliance on a sole provider and solidifying plans to spend across a long-term horizon, it was seen by many as a big _concentration risk_. 
+
+As [Corey Quinn](https://www.duckbillgroup.com/blog/figmas-300k-daily-aws-bill-isnt-the-scandal-you-think-it-is/) points out, that size of commitment may be risky for a company hosting "lifted and shifted" VMs where compute costs come at a premium, but Figma's technical stack is deeply ingrained in AWS ecosystem already. Once you are far enough along the adoption curve of a particular cloud provider, it leaves a lot of money on the table if you **do not** make commitments via Savings Plans/reserved capacity, or move some of your ["glue code" to the infrastructure](https://serverlessland.com/content/guides/refactoring-serverless/introduction), which has quantifiable cost savings measured in Engineering hours.
+
+{{< callout type="note" title="" >}}
+One of my go-to talks from recent AWS re:Invent is about _Serverless Refactoring_, which blurs the line between application and infrastructure concerns.
+{{< /callout >}}
+{{< youtube id="bIu8XZZROw4" start=0 loading="lazy" autoplay=false >}}
+> _**TL;DW (Too Long; Didn't Watch)**_  
+> _The next time you find yourself writing code to integrate two pieces of infrastructure, it's worth questioning if a different primitive exists instead._
 
 ### Summary 🧵
 This post tried to cover a lot of ground. Here are my main takeaways:
