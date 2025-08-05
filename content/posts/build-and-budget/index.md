@@ -117,24 +117,21 @@ Modifying the behaviour of application code to alter its usage of resources (e.g
 ### Shifting left ⏪
 So far we have only touched on _optimisations_ once costs are already a problem. With greater ownership across teams, we can shift a lot of these concerns "left" earlier in the development cycle, to reduce the size of future problems. Not every developer needs to take on large, multi-week optimisation projects to be seen as "owning" costs. 
 
-Let's look at some practical methods that enable cost ownership earlier on in development. 
+Giving teams _visibility_ of what a baseline looks like so they can consider costs is the first step.  If using a cloud provider, a lot of these primitives are provided out of the box.
+1. **Tagging**: Tag infrastructure by team/project/department. Regularly monitor Cost Explorer dashboards and schedule reports.
+1. **Alerting**: Set up budgets and anomaly detection, with integrations to the communication/incident management platforms (e.g. Slack -> incident.io).
+1. **Dependencies**: Monitor usage metrics for each third-party provider / service / API that has its own pricing model.
 
-#### Observability 📊
-...
-
-System usage
-Third party dependencies (SaaS)
-Cost explorer
-APIs - anomalies, incidents
-Budgets / revenue
+Once observability is in place, let's look at some practical methods that enable cost ownership earlier on in development. 
 
 #### Designs 🎨
-...
+During the design of a new service or feature,  
 
 - ADRs
 - Internal blogs / knowledge shares - repeating what has happened
 - Mental model
 - Pricing calculators - AWS/GCP, https://pricepertoken.com/
+- 
 
 {{< callout type="note" title="Cloud Cost Mental Model 💲" collapse="true" >}}
 - Compute = (Capacity * Time)
@@ -143,7 +140,7 @@ Budgets / revenue
 {{< /callout >}}
 
 #### Tooling 🛠️
-...
+A range of tooling exists to target the IDE and Pull Request workflows, so 
 
 - https://docs.datadoghq.com/developers/ide_plugins/idea/
 - https://www.infracost.io/
@@ -151,12 +148,11 @@ Budgets / revenue
 
 #### Artificial Intelligence 🤖
 ...
-
 - Kiro, Claude.md, CodeRabbit
+- https://ethanding.substack.com/p/ai-subscriptions-get-short-squeezed
 
 ### "Lock-in": Friend or foe? 🔐
 ...
-
 Another topic raised by the reaction to Figma's S-1 filing is vendor "lock-in". A lot of the scrutiny of Figma's figures came from their $500m multi-year commitment to AWS, admitting their reliance on a sole provider. Many do not consider the opportunity cost of not leveraging scale benefits of a long-term commitment.
 https://serverlessland.com/content/guides/refactoring-serverless/introduction
 
