@@ -126,22 +126,15 @@ Giving teams _visibility_ of their baseline costs is the first step.  If using a
 Once observability is in place, let's look at some practical methods that enable cost ownership earlier on in development. 
 
 #### Designs 🎨
-During the design of a new service or feature,  
+During the design of a new service or feature, ADRs (Architectural Decision Records) could explicitly consider the cost impact of decisions - forcing early discussion. Whilst it is tricky to provide exact dollar estimates, a "back of the envelope" calculation is made far easier by cloud providers' [Pricing Calculators](https://calculator.aws/#/). In the age of AI and LLMs, there are even [token calculators](https://pricepertoken.com/)!
 
-- ADRs
-- Internal blogs / knowledge shares - repeating what has happened
-- Mental model
-- Pricing calculators - AWS/GCP, https://pricepertoken.com/
-- 
-
-{{< callout type="note" title="Cloud Cost Mental Model 💲" collapse="true" >}}
-- Compute = (Capacity * Time)
-- Storage = (Retention * Data Size) + Data Transferred
-- Logging = (Events * Size)
-{{< /callout >}}
+> A mental model I like to use for Cloud costs is:
+> - Compute = (Capacity * Time)
+> - Storage = (Retention * Data Size) + Data Transferred
+> - Logging = (Events * Size)
 
 #### Tooling 🛠️
-A range of tooling exists to target the IDE and Pull Request workflows, so 
+A range of tooling exists to target the IDE and Pull Request workflows, so developers
 
 - https://docs.datadoghq.com/developers/ide_plugins/idea/
 - https://www.infracost.io/
