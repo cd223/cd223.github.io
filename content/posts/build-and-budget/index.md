@@ -3,7 +3,7 @@ title: "You build it, you budget it? 💰"
 date: 2025-08-06
 tags: ["aws", "cloud", "finops"]
 showToc: true
-draft: true
+draft: false
 TocOpen: false
 hidemeta: false
 comments: true
