@@ -1,6 +1,6 @@
 ---
 title: "You build it, you budget it? 💰"
-date: 2025-08-06
+date: 2025-08-07
 tags: ["aws", "cloud", "finops"]
 showToc: true
 draft: false
